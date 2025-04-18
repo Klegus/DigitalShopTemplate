@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .fade-in-on-scroll {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Softer, slower pulsing glow animation for background */
+  .animate-pulse-glow-soft {
+    animation: pulseGlowSoft 6s infinite ease-in-out;
+  }
+
+  @keyframes pulseGlowSoft {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(1.01);
+    }
+  }
+
+  /* Glossy effect utility - Made EXTREMELY subtle */
+  .glossy-effect {
+    @apply relative overflow-hidden;
+  }
+  .glossy-effect::after {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full;
+    /* Extremely subtle white gradient */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 30%, rgba(255, 255, 255, 0) 100%);
+    /* Dark mode alternative - fixed syntax, also extremely subtle */
+    @apply dark:bg-gradient-to-b dark:from-[rgba(255,255,255,0.03)] dark:via-[rgba(255,255,255,0.01)] dark:to-transparent;
+    pointer-events: none; 
+  }
+
+  /* Neon flicker animation */
+  .animate-neon-flicker {
+    animation: neonFlicker 5s infinite alternate ease-in-out;
+  }
+
+  @keyframes neonFlicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      opacity: 1;
+      /* Reduced shadow spread and blur */
+      text-shadow: 
+        0 0 1px theme('colors.blue.300'), 
+        0 0 5px theme('colors.blue.400'), 
+        0 0 10px theme('colors.blue.500');
+    }
+    20%, 24%, 55% {
+      opacity: 0.4; /* Slightly less dim */
+      text-shadow: none;
+    }
+  }
+}
+
+/* Optional: Add custom base styles or component styles here */ 
