@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { advertisements } from '@/lib/placeholder-data';
 import { notFound } from 'next/navigation';
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface AdvertDetailPageProps {
   params: {
@@ -41,13 +42,15 @@ export default function AdvertDetailPage({ params }: AdvertDetailPageProps) {
   // Format date
   const formattedDate = format(new Date(advert.date), 'MMMM dd, yyyy');
   
+  const { t } = useLanguage(); // Get translation function
+
   return (
     <article className="max-w-4xl mx-auto px-4 py-12">
       {/* Breadcrumb - dark mode text */}
       <nav className="flex mb-8 text-sm">
-        <Link href="/" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+        <Link href="/" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">{t('home')}</Link>
         <span className="mx-2 text-gray-400 dark:text-gray-500">/</span>
-        <Link href="/advertisements" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">Announcements</Link>
+        <Link href="/advertisements" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">{t('announcements')}</Link>
         <span className="mx-2 text-gray-400 dark:text-gray-500">/</span>
         <span className="text-gray-700 dark:text-gray-200 font-medium">{advert.title}</span>
       </nav>
@@ -114,7 +117,7 @@ export default function AdvertDetailPage({ params }: AdvertDetailPageProps) {
       <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <span className="mr-4 text-gray-700 dark:text-gray-300 font-medium">Share:</span>
+            <span className="mr-4 text-gray-700 dark:text-gray-300 font-medium">{t('share')}</span>
             <div className="flex gap-2">
               <button className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" aria-label="Share on Facebook">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +144,7 @@ export default function AdvertDetailPage({ params }: AdvertDetailPageProps) {
             <svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Back to Announcements
+            {t('back_to_announcements')}
           </Link>
         </div>
       </div>
